@@ -33,4 +33,10 @@ public class Square {
 	public void removeFlag() {
 		flagged = false;
 	}
+
+	public boolean cleared() {
+	}
+
+	public boolean clear() {
+	}
 }
