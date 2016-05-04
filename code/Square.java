@@ -6,17 +6,17 @@
  * @author Jacob Adlers
  */
 public class Square {
-	
+	private boolean mine;
 
 	public Square() {
-
+		mine = false;
 	}
 
 	public boolean mine() {
-
+		return mine;
 	}
 
 	public void placeMine() {
-
+		mine = true;
 	}
 }
