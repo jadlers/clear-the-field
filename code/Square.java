@@ -19,4 +19,13 @@ public class Square {
 	public void placeMine() {
 		mine = true;
 	}
+
+	public boolean flagged() {
+	}
+
+	public void placeFlag() {
+	}
+
+	public void removeFlag() {
+	}
 }

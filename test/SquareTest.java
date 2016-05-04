@@ -17,4 +17,13 @@ public class SquareTest {
 		square.placeMine();
 		Assert.assertTrue(square.mine());
 	}
+
+	@Test
+	public void testFlag() {
+		Assert.assertFalse(square.flagged());
+		square.placeFlag();
+		Assert.assertTrue(square.flagged());
+		square.removeFlag();
+		Assert.assertFalse(square.flagged());
+	}
 }
