@@ -1,0 +1,14 @@
+### INTELLIJ IDEA
+*.iml
+.idea/
+*.ipr
+*.iws
+/out/
+
+### Java
+.class
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
