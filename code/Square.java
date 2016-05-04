@@ -7,9 +7,11 @@
  */
 public class Square {
 	private boolean mine;
+	private boolean flagged;
 
 	public Square() {
 		mine = false;
+		flagged = false;
 	}
 
 	public boolean mine() {
@@ -21,11 +23,14 @@ public class Square {
 	}
 
 	public boolean flagged() {
+		return flagged;
 	}
 
 	public void placeFlag() {
+		flagged = true;
 	}
 
 	public void removeFlag() {
+		flagged = false;
 	}
 }
