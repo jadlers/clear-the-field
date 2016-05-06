@@ -8,10 +8,12 @@
 public class Square {
 	private boolean mine;
 	private boolean flagged;
+	private boolean cleared;
 
 	public Square() {
 		mine = false;
 		flagged = false;
+		cleared = false;
 	}
 
 	public boolean mine() {
@@ -35,8 +37,15 @@ public class Square {
 	}
 
 	public boolean cleared() {
+		return cleared;
 	}
 
 	public boolean clear() {
+		if (mine) {
+			return false;
+		} else {
+			cleared = true;
+			return true;
+		}
 	}
 }
