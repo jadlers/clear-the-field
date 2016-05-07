@@ -6,9 +6,7 @@ public class Field {
 	private Square[][] field;
 
 	public Field(int width, int height) {
-		if (width < 2 || height < 2) {
-			throw new IllegalArgumentException("Both the width & height must be > 1");
-		}
+		checkDimension(width, height);
 		field = createField(width, height);
 	}
 
@@ -38,5 +36,19 @@ public class Field {
 	 */
 	public Square[][] getField() {
 		return field;
+	}
+
+	/**
+	 * Ensures that the two-dimensional field array can be created correctly
+	 * else it throws an IllegalArgumentException.
+	 *
+	 * @param width the width to check
+	 * @param height the height to check
+	 * @throws IllegalArgumentException
+	 */
+	private void checkDimension(int width, int height) throws IllegalArgumentException {
+		if (width < 2 || height < 2) {
+			throw new IllegalArgumentException("Both the width & height must be > 1");
+		}
 	}
 }
