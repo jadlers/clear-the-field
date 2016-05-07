@@ -6,6 +6,9 @@ public class Field {
 	private Square[][] field;
 
 	public Field(int width, int height) {
+		if (width < 2 || height < 2) {
+			throw new IllegalArgumentException("Both the width & height must be > 1");
+		}
 		field = createField(width, height);
 	}
 
