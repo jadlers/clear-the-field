@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * The actual field that's built with squares in a rectangular
  * shape. It's this field that you want to make safer.
@@ -5,13 +7,55 @@
 public class Field {
 	private Square[][] field;
 
+	/**
+	 * Creates a field with the given dimensions if both the width and the height
+	 * values are > 1. Also places mines in approximately 20% of the Squares
+	 * in the field.
+	 *
+	 * @param width the width of the field
+	 * @param height the height of the field
+	 */
 	public Field(int width, int height) {
 		checkDimension(width, height);
 		field = createField(width, height);
+		int numberOfMines = (width*height)/5;
+		if (numberOfMines < 1) {
+			numberOfMines = 1;
+		}
+		placeMines(numberOfMines);
 	}
 
+	/**
+	 * Creates a field with the given dimensions if both the width and the height
+	 * values are > 1. Also places mines in the given amount of Squares
+	 *
+	 * @param width the width of the field
+	 * @param height the height of the field
+	 * @param numberOfMines the amount of mines to be placed in the field
+	 */
 	public Field(int width, int height, int numberOfMines) {
+		checkDimension(width, height);
+		field = createField(width, height);
+		placeMines(numberOfMines);
+	}
 
+	/**
+	 * Places the number of mines randomly in the field.
+	 *
+	 * @param numberOfMines
+	 */
+	private void placeMines(int numberOfMines) {
+		int leftToPlace = numberOfMines;
+		Random rand = new Random();
+		while (leftToPlace > 0) {
+			int x = rand.nextInt(field.length);
+			int y = rand.nextInt(field[0].length);
+			// If it's not a mine => place one
+			if (!field[x][y].mine()) {
+				field[x][y].placeMine();
+				leftToPlace--;
+			}
+		}
 	}
 
 	/**
