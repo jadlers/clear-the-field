@@ -29,4 +29,20 @@ public class FieldTest {
 		Assert.assertEquals(width, area.length);
 		Assert.assertEquals(height, area[0].length);
 	}
+
+	@Test
+	public void testPlaceMines() {
+		int placedMines = 10;
+		int foundMines = 0;
+		Field field = new Field(10, 10, placedMines);
+		Square[][] area = field.getField();
+		for (Square[] x: area) {
+			for (Square current : x) {
+				if (current.mine()) {
+					foundMines++;
+				}
+			}
+		}
+		Assert.assertEquals(placedMines, foundMines);
+	}
 }

@@ -12,6 +12,10 @@ public class Field {
 		field = createField(width, height);
 	}
 
+	public Field(int width, int height, int numberOfMines) {
+
+	}
+
 	/**
 	 * Fills up the two-dimensional array of Squares that represents the field.
 	 *
