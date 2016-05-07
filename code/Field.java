@@ -12,6 +12,13 @@ public class Field {
 		field = createField(width, height);
 	}
 
+	/**
+	 * Fills up the two-dimensional array of Squares that represents the field.
+	 *
+	 * @param width the number of squares horizontal
+	 * @param height the number of squares vertical
+	 * @return the field filled with Squares
+	 */
 	private Square[][] createField(int width, int height) {
 		Square[][] filledField = new Square[width][height];
 		for (int x = 0; x < width; x++) {
