@@ -21,4 +21,11 @@ public class Field {
 		}
 		return filledField;
 	}
+
+	/**
+	 * @return the Square[][] that represents the field
+	 */
+	public Square[][] getField() {
+		return field;
+	}
 }

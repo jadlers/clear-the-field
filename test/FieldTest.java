@@ -19,4 +19,14 @@ public class FieldTest {
 		}
 		Assert.assertTrue(rightExceptionThrown);
 	}
+
+	@Test
+	public void testCreateField() {
+		int width = 10;
+		int height = 10;
+		Field field = new Field(width, height);
+		Square[][] area = field.getField();
+		Assert.assertEquals(width, area.length);
+		Assert.assertEquals(height, area[0].length);
+	}
 }
