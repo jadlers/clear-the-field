@@ -106,6 +106,49 @@ public class Field {
 	 * @return the amount of mines surrounding the Square
 	 */
 	public int minesSurrounding(int x, int y) {
+		int surrounding = 0;
 
+		int[] bounds = defineBounds(x, y);
+		for (int curX = bounds[0]; curX <= bounds[1]; curX++) {
+			for (int curY = bounds[2]; curY <= bounds[3]; curY++) {
+				if (field[curX][curY].mine()) {
+					surrounding++;
+				}
+			}
+		}
+		return surrounding;
+	}
+
+	/**
+	 * Defines the max and min values of x and y when checking the
+	 * surrounding 8 Squares of one specific Square. This is to
+	 * prevent any ArrayIndexOutOfBounds exceptions.
+	 *
+	 * Indices in bounds array:
+	 * 0 = xMin, 1 = xMax, 2 = yMin, 3 = yMax
+	 *
+	 * @param x the x value to check around
+	 * @param y the y value to check around
+	 * @return valid bounds around the specified x & y
+	 */
+	private int[] defineBounds(int x, int y) {
+		int[] bounds = new int[4];
+		bounds[0] = x-1;
+		bounds[1] = x+1;
+		bounds[2] = y-1;
+		bounds[3] = y+1;
+
+		if (bounds[0] < 0) {
+			bounds[0] = 0;
+		} else if (bounds[1] == field.length) {
+			bounds[1] = x;
+		}
+		if (bounds[2] < 0) {
+			bounds[2] = 0;
+		} else if (bounds[3] == field[0].length) {
+			bounds[3] = y;
+		}
+
+		return bounds;
 	}
 }
