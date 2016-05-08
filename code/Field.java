@@ -36,6 +36,9 @@ public class Field {
 	public Field(int width, int height, int numberOfMines) {
 		checkDimension(width, height);
 		field = createField(width, height);
+		if (numberOfMines >= width*height) {
+			throw new IllegalArgumentException("Amount of mines must be < total area");
+		}
 		placeMines(numberOfMines);
 	}
 
