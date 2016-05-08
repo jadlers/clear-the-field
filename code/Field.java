@@ -79,7 +79,8 @@ public class Field {
 	 * @return the Square[][] that represents the field
 	 */
 	public Square[][] getField() {
-		return field;
+		Square[][] copy = field.clone();
+		return copy;
 	}
 
 	/**
@@ -94,5 +95,17 @@ public class Field {
 		if (width < 2 || height < 2) {
 			throw new IllegalArgumentException("Both the width & height must be > 1");
 		}
+	}
+
+	/**
+	 * Checks all the spots right next to the given Square for mines and returns
+	 * the amount it finds. It can be from 0 to 8 mines surrounding each Square.
+	 *
+	 * @param x the x position of the Square
+	 * @param y the y position of the Square
+	 * @return the amount of mines surrounding the Square
+	 */
+	public int minesSurrounding(int x, int y) {
+
 	}
 }

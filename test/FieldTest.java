@@ -45,4 +45,47 @@ public class FieldTest {
 		}
 		Assert.assertEquals(placedMines, foundMines);
 	}
+
+	/**
+	 *  | M | M | M | when trying to clear
+	 *  ------------- the X spot it should
+	 *  | M | X | M | return 8
+	 *  ------------- X = uncleared
+	 *  | M | M | M | M = mine
+	 */
+	@Test
+	public void testMinesSurroundingMiddle() {
+		// I want to place the mines myself
+		Field field = new Field(10, 10, 0);
+		Square[][] area = field.getField();
+		area[0][0].placeMine();
+		area[0][1].placeMine();
+		area[0][2].placeMine();
+		area[1][0].placeMine();
+		area[1][2].placeMine();
+		area[2][0].placeMine();
+		area[2][1].placeMine();
+		area[2][2].placeMine();
+		int surrounding = field.minesSurrounding(1, 1);
+		Assert.assertEquals(8, surrounding);
+	}
+
+	/**
+	 *  | X | M | M | when trying to clear
+	 *  ------------- the X spot it should
+	 *  | M | M | M | return 3
+	 *  ------------- X = uncleared
+	 *  | M | M | M | M = mine
+	 */
+	@Test
+	public void testMinesSurroundingCorner() {
+		// I want to place the mines myself
+		Field field = new Field(10, 10, 0);
+		Square[][] area = field.getField();
+		area[0][1].placeMine();
+		area[1][1].placeMine();
+		area[1][0].placeMine();
+		int surrounding = field.minesSurrounding(0, 0);
+		Assert.assertEquals(3, surrounding);
+	}
 }
