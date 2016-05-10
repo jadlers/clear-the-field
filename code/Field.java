@@ -154,4 +154,15 @@ public class Field {
 
 		return bounds;
 	}
+
+	/**
+	 * Gets a specific Square from the field
+	 *
+	 * @param x the x coordinate of the square in the field
+	 * @param y the y coordinate of the square in the field
+	 * @return the Square on the position
+	 */
+	private Square getSquare(int x, int y) {
+		return field[x][y];
+	}
 }
