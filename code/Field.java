@@ -156,6 +156,29 @@ public class Field {
 	}
 
 	/**
+	 * Creates a SquareFigure that represents the Square on the specific
+	 * place in the field.
+	 *
+	 * @param x the x coordinate of the square in the field
+	 * @param y the y coordinate of the square in the field
+	 * @param width the height of the SquareFigure
+	 * @param height the width of the SquareFigure
+	 * @return the SquareFigure that represents the Square
+	 */
+	public SquareFigure createSquareFigure(int x, int y, int width, int height) {
+		Square square = getSquare(x, y);
+		String info = "";
+		if (square.cleared()) {
+			return new SquareFigure("", x, y, width, height, true);
+		} else if (square.flagged()) {
+			info = "F";
+		} else {
+			info = String.valueOf(minesSurrounding(x, y));
+		}
+		return new SquareFigure(info, x, y, width, height, false);
+	}
+
+	/**
 	 * Gets a specific Square from the field
 	 *
 	 * @param x the x coordinate of the square in the field
