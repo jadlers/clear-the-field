@@ -33,8 +33,13 @@ public class PlayView {
 				int currentX = x;
 				int currentY = y;
 				figure.setOnMouseClicked(event -> {
-					field.click(currentX, currentY);
-					updateScene();
+					boolean okay = field.click(currentX, currentY);
+					if (okay) {
+						updateScene();
+					} else {
+						FinishedGame.display(window, "Explosion!", "Sorry to say it but you hit\n a mine and lost " +
+								"the game :(");
+					}
 				});
 				figure.setLayoutX(x*size+x*margin);
 				figure.setLayoutY(y*size+y*margin);
