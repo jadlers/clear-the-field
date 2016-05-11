@@ -7,7 +7,10 @@ the square you checked. The problem is that the tool will make any mine explode 
 careful!
 
 ## How to install
-This part will be written when you can play some part of the game. It will update as the project evolves.
+1. Click the "Download ZIP" button and unzip the file
+2. Open the terminal and navigate to the **code** directory inside the unzipped directory clear-the-field
+3. Compile the game by typing: ```javac Game.java```
+4. Start the game by typing: ```java Game```
 
 ## Testing strategy
 I will work using a test driven development, this forces me to write tests before I write any additional code. It 
