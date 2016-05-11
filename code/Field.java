@@ -249,7 +249,22 @@ public class Field {
 		}
 	}
 
+	/**
+	 * Goes through all squares to see if any square without a mine
+	 * is not cleared. If if finds anyone that isn't cleared then
+	 * it returns false immediately. If it gets through the whole
+	 * field and all non mine squares are cleared it returns true
+	 *
+	 * @return true if all non mine squares are cleared
+	 */
 	public boolean checkWin() {
+		for (Square[] column : field) {
+			for (Square current : column) {
+				if (!current.mine() && !current.cleared()) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 }
