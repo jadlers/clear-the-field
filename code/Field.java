@@ -167,9 +167,11 @@ public class Field {
 	 */
 	public SquareFigure createSquareFigure(int x, int y, int width, int height) {
 		Square square = getSquare(x, y);
-		String info = "";
-		if (square.cleared()) {
+		String info;
+		if (!square.cleared()) {
 			return new SquareFigure("", x, y, width, height, true);
+		} else if (square.mine()) { // For testing only
+			info = "M";
 		} else if (square.flagged()) {
 			info = "F";
 		} else {
@@ -187,5 +189,17 @@ public class Field {
 	 */
 	private Square getSquare(int x, int y) {
 		return field[x][y];
+	}
+
+	/**
+	 * Tries to clear the specified square in the field.
+	 *
+	 * @param x the x coordinate of the square in the field
+	 * @param y the y coordinate of the square in the field
+	 * @return true if it could clear the square false otherwise
+	 */
+	public boolean click(int x, int y) {
+		Square square = getSquare(x, y);
+		return square.clear();
 	}
 }
