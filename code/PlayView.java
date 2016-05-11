@@ -30,7 +30,7 @@ public class PlayView {
 		Group layout = new Group();
 		for (int x = 0; x < field.getField().length; x++) {
 			for (int y = 0; y < field.getField()[0].length; y++) {
-				SquareFigure figure = field.createSquareFigure(x, y, size, size);
+				SquareFigure figure = field.createSquareFigure(x, y, size);
 				int currentX = x;
 				int currentY = y;
 				figure.setOnMouseClicked(event -> {

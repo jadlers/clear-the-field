@@ -9,15 +9,12 @@ import javafx.scene.text.Text;
  * frame in the game.
  */
 public class SquareFigure extends StackPane {
-	private int x, y;
 	private final Paint notClearedPaint = Paint.valueOf(Color.LIGHTGRAY.toString());
 	private final Paint clearedPaint = Paint.valueOf(Color.GRAY.toString());
 	private final Paint textPaint = Paint.valueOf(Color.BLACK.toString());
 
-	public SquareFigure(String info, int x, int y, int width, int height, boolean cleared) {
-		this.x = x;
-		this.y = y;
-		Rectangle rectangle = new Rectangle(width, height);
+	public SquareFigure(String info, int size, boolean cleared) {
+		Rectangle rectangle = new Rectangle(size, size);
 		Text label = new Text(info);
 
 		// Begin styling
@@ -33,13 +30,5 @@ public class SquareFigure extends StackPane {
 		// End styling
 
 		getChildren().addAll(rectangle, label);
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
 	}
 }

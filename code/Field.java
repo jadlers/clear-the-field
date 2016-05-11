@@ -161,16 +161,15 @@ public class Field {
 	 *
 	 * @param x the x coordinate of the square in the field
 	 * @param y the y coordinate of the square in the field
-	 * @param width the height of the SquareFigure
-	 * @param height the width of the SquareFigure
+	 * @param size the width & height of the SquareFigure
 	 * @return the SquareFigure that represents the Square
 	 */
-	public SquareFigure createSquareFigure(int x, int y, int width, int height) {
+	public SquareFigure createSquareFigure(int x, int y, int size) {
 		Square square = getSquare(x, y);
 		String info;
 		int surrounding = minesSurrounding(x, y);
 		if (!square.cleared()) {
-			return new SquareFigure("", x, y, width, height, true);
+			return new SquareFigure("", size, true);
 		} else if (square.mine()) { // For testing only
 			info = "M";
 		} else if (square.flagged()) {
@@ -181,7 +180,7 @@ public class Field {
 			info = String.valueOf(surrounding);
 		}
 
-		return new SquareFigure(info, x, y, width, height, false);
+		return new SquareFigure(info, size, false);
 	}
 
 	/**
