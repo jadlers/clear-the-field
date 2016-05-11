@@ -1,5 +1,6 @@
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,12 +34,10 @@ public class PlayView {
 				int currentX = x;
 				int currentY = y;
 				figure.setOnMouseClicked(event -> {
-					boolean okay = field.click(currentX, currentY);
-					if (okay) {
-						updateScene();
-					} else {
-						FinishedGame.display(window, "Explosion!", "Sorry to say it but you hit\n a mine and lost " +
-								"the game :(");
+					if (event.getButton() == MouseButton.PRIMARY) {
+						primaryKey(currentX, currentY);
+					} else if (event.getButton() == MouseButton.SECONDARY) {
+						secondaryKey(currentX, currentY);
 					}
 				});
 				figure.setLayoutX(x*size+x*margin);
@@ -47,5 +46,33 @@ public class PlayView {
 			}
 		}
 		return new Scene(layout, 600, 500);
+	}
+
+	/**
+	 * Tries to clear the clicked square. If it's possible to clear it then
+	 * update the scene and play on. Else loose the game since the player
+	 * tried to clear a mine.
+	 *
+	 * @param x the x coordinate of the square in the field
+	 * @param y the y coordinate of the square in the field
+	 */
+	private void primaryKey(int x, int y) {
+		boolean okay = field.click(x, y);
+		if (okay) {
+			updateScene();
+		} else {
+			FinishedGame.display(window, "Explosion!", "Sorry to say it but you hit\n a mine and lost " +
+					"the game :(");
+		}
+	}
+
+	/**
+	 * Toggles if the square is flagged or not.
+	 *
+	 * @param x the x coordinate of the square in the field
+	 * @param y the y coordinate of the square in the field
+	 */
+	private void secondaryKey(int x, int y) {
+		field.toggleFlag(x, y);
 	}
 }

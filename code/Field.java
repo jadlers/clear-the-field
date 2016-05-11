@@ -228,4 +228,24 @@ public class Field {
 			}
 		}
 	}
+
+	/**
+	 * If the specified square is:
+	 *  - not cleared nor flagged -> place a flag
+	 *  - not cleared but flagged -> remove the flag
+	 *
+	 * @param x the x coordinate of the square in the field
+	 * @param y the y coordinate of the square in the field
+	 */
+	public void toggleFlag(int x, int y) {
+		Square square = getSquare(x, y);
+		if (square.cleared()) {
+			return;
+		}
+		if (square.flagged()) {
+			square.removeFlag();
+		} else {
+			square.placeFlag();
+		}
+	}
 }
