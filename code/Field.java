@@ -169,11 +169,13 @@ public class Field {
 		String info;
 		int surrounding = minesSurrounding(x, y);
 		if (!square.cleared()) {
-			return new SquareFigure("", size, true);
+			if (!square.flagged()) {
+				return new SquareFigure("", size, true);
+			} else {
+				return new SquareFigure("F", size, true);
+			}
 		} else if (square.mine()) { // For testing only
 			info = "M";
-		} else if (square.flagged()) {
-			info = "F";
 		} else if (surrounding == 0) {
 			info = "";
 		} else {

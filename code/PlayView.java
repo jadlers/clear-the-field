@@ -74,5 +74,6 @@ public class PlayView {
 	 */
 	private void secondaryKey(int x, int y) {
 		field.toggleFlag(x, y);
+		updateScene();
 	}
 }
