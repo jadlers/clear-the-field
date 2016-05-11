@@ -60,6 +60,10 @@ public class PlayView {
 		boolean okay = field.click(x, y);
 		if (okay) {
 			updateScene();
+			boolean won = field.checkWin();
+			if (won) {
+				FinishedGame.display(window, "Hero of the day!", "You did it!\nThe field is now a safe place.");
+			}
 		} else {
 			FinishedGame.display(window, "Explosion!", "Sorry to say it but you hit\n a mine and lost " +
 					"the game :(");
