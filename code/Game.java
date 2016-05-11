@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  * Showing the game graphically using JavaFX. This class is responsible for starting
  * the graphical view and updating it.
  */
-public class GraphicView extends Application {
+public class Game extends Application {
 	private Stage window;
 
 	public static void main(String[] args) {
@@ -39,10 +39,10 @@ public class GraphicView extends Application {
 		layout.setAlignment(Pos.CENTER);
 		Label gameTitle = new Label("Welcome to Clear the Field!");
 		Button playButton = new Button("Play");
+		playButton.setOnAction(event -> new PlayView());
 		layout.getChildren().addAll(gameTitle, playButton);
 
-
-		Scene startScreen = new Scene(layout, 600, 400);
+		Scene startScreen = new Scene(layout, 400, 300);
 		window.setScene(startScreen);
 		window.show();
 
