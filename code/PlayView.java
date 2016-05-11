@@ -16,7 +16,7 @@ public class PlayView {
 	public PlayView() {
 		window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
-		field = new Field(10, 10, 2);
+		field = new Field(10, 10, 10);
 		updateScene();
 	}
 
