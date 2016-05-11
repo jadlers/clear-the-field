@@ -13,12 +13,12 @@ public class SquareFigure extends StackPane {
 	private final Paint clearedPaint = Paint.valueOf(Color.GRAY.toString());
 	private final Paint textPaint = Paint.valueOf(Color.BLACK.toString());
 
-	public SquareFigure(String info, int size, boolean cleared) {
+	public SquareFigure(String info, int size, boolean notCleared) {
 		Rectangle rectangle = new Rectangle(size, size);
 		Text label = new Text(info);
 
 		// Begin styling
-		if (cleared) {
+		if (notCleared) {
 			rectangle.setFill(clearedPaint);
 		} else {
 			rectangle.setFill(notClearedPaint);
