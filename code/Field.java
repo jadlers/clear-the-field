@@ -82,8 +82,7 @@ public class Field {
 	 * @return the Square[][] that represents the field
 	 */
 	public Square[][] getField() {
-		Square[][] copy = field.clone();
-		return copy;
+		return field;
 	}
 
 	/**
@@ -248,5 +247,9 @@ public class Field {
 		} else {
 			square.placeFlag();
 		}
+	}
+
+	public boolean checkWin() {
+		return true;
 	}
 }

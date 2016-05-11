@@ -88,4 +88,28 @@ public class FieldTest {
 		int surrounding = field.minesSurrounding(0, 0);
 		Assert.assertEquals(3, surrounding);
 	}
+
+	@Test
+	public void testCheckWin() {
+		Field field = new Field(10, 10, 0);
+		Square[][] area = field.getField();
+		area[0][0].placeMine();
+		area[9][9].placeMine();
+		// Clear all squares except the ones hiding mines
+		for (int x = 0; x < area.length; x++) {
+			for (int y = 0; y < area[0].length; y++) {
+				if (x == 0 && y == 0) {
+					continue;
+				} else if (x == 9 && y == 9) {
+					continue;
+				} else if (x == 2 && y == 5) {
+					continue;
+				}
+				area[x][y].clear();
+			}
+		}
+		Assert.assertFalse(field.checkWin());
+		area[2][5].clear();
+		Assert.assertTrue(field.checkWin());
+	}
 }
