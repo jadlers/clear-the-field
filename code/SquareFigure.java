@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
  */
 public class SquareFigure extends StackPane {
 	private final Paint notClearedPaint = Paint.valueOf(Color.LIGHTGRAY.toString());
-	private final Paint clearedPaint = Paint.valueOf(Color.GRAY.toString());
+	private final Paint clearedPaint = Paint.valueOf(Color.CHARTREUSE.toString());
 	private final Paint textPaint = Paint.valueOf(Color.BLACK.toString());
 
 	public SquareFigure(String info, int size, boolean notCleared) {
@@ -19,9 +19,9 @@ public class SquareFigure extends StackPane {
 
 		// Begin styling
 		if (notCleared) {
-			rectangle.setFill(clearedPaint);
-		} else {
 			rectangle.setFill(notClearedPaint);
+		} else {
+			rectangle.setFill(clearedPaint);
 		}
 		rectangle.setStroke(textPaint);
 		rectangle.setArcHeight(5);
