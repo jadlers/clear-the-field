@@ -168,15 +168,19 @@ public class Field {
 	public SquareFigure createSquareFigure(int x, int y, int width, int height) {
 		Square square = getSquare(x, y);
 		String info;
+		int surrounding = minesSurrounding(x, y);
 		if (!square.cleared()) {
 			return new SquareFigure("", x, y, width, height, true);
 		} else if (square.mine()) { // For testing only
 			info = "M";
 		} else if (square.flagged()) {
 			info = "F";
+		} else if (surrounding == 0) {
+			info = "";
 		} else {
-			info = String.valueOf(minesSurrounding(x, y));
+			info = String.valueOf(surrounding);
 		}
+
 		return new SquareFigure(info, x, y, width, height, false);
 	}
 
@@ -200,6 +204,28 @@ public class Field {
 	 */
 	public boolean click(int x, int y) {
 		Square square = getSquare(x, y);
-		return square.clear();
+		boolean cleared = square.clear();
+		if (minesSurrounding(x, y) == 0) {
+			clickSurrounding(x, y);
+		}
+		return cleared;
+	}
+
+	/**
+	 * Clicks all the surrounding squares of the specified square.
+	 *
+	 * @param x the x coordinate of the square in the field
+	 * @param y the y coordinate of the square in the field
+	 */
+	private void clickSurrounding(int x, int y) {
+		int[] bounds = defineBounds(x, y);
+		for (int currentX = bounds[0]; currentX <= bounds[1]; currentX++) {
+			for (int currentY = bounds[2]; currentY <= bounds[3]; currentY++) {
+				boolean alreadyCleared = field[currentX][currentY].cleared();
+				if (!alreadyCleared && !(currentX == x && currentY == y)) {
+					click(currentX, currentY);
+				}
+			}
+		}
 	}
 }
