@@ -30,6 +30,12 @@ public class PlayView {
 		for (int x = 0; x < field.getField().length; x++) {
 			for (int y = 0; y < field.getField()[0].length; y++) {
 				SquareFigure figure = field.createSquareFigure(x, y, size, size);
+				int currentX = x;
+				int currentY = y;
+				figure.setOnMouseClicked(event -> {
+					field.click(currentX, currentY);
+					updateScene();
+				});
 				figure.setLayoutX(x*size+x*margin);
 				figure.setLayoutY(y*size+y*margin);
 				layout.getChildren().add(figure);
