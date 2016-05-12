@@ -18,10 +18,11 @@ public class Field {
 	public Field(int width, int height) {
 		checkDimension(width, height);
 		field = createField(width, height);
-		int numberOfMines = (width*height)/5;
+		int numberOfMines = (width*height)/10;
 		if (numberOfMines < 1) {
 			numberOfMines = 1;
 		}
+		System.out.println(numberOfMines);
 		placeMines(numberOfMines);
 	}
 
