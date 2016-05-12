@@ -1,9 +1,12 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -42,12 +45,29 @@ public class Game extends Application {
 		Label gameTitle = new Label("Welcome to Clear the Field!");
 		Button playButton = new Button("Play");
 		playButton.setOnAction(event -> new PlayView(fieldSize, numberOfMines));
-		layout.getChildren().addAll(gameTitle, playButton);
+		Button settingsBtn = new Button("Settings");
+		settingsBtn.setOnAction(event -> openSettings());
+		layout.getChildren().addAll(gameTitle, playButton, settingsBtn);
 
 		Scene startScreen = new Scene(layout, 400, 300);
 		window.setScene(startScreen);
 		window.show();
 
+	}
+
+	/**
+	 * Opens a new window where the user can specify settings for
+	 * the size of the field and the amount of mines in the field
+	 */
+	private void openSettings() {
+		Stage window = new Stage();
+		window.setTitle("Settings");
+		window.initModality(Modality.APPLICATION_MODAL);
+
+		VBox layout = new VBox(20);
+		Scene scene = new Scene(layout);
+		window.setScene(scene);
+		window.show();
 	}
 
 	/**
