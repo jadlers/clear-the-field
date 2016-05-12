@@ -11,7 +11,8 @@ import javafx.stage.Stage;
  * the graphical view and updating it.
  */
 public class Game extends Application {
-	private Stage window;
+	private int[] fieldSize; // indices 0: width, 1: height
+	private int numberOfMines;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -32,19 +33,29 @@ public class Game extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		window = primaryStage;
+		Stage window = primaryStage;
 		window.setTitle("Clear The Field");
+		setDefaultSettings();
 
 		VBox layout = new VBox(10);
 		layout.setAlignment(Pos.CENTER);
 		Label gameTitle = new Label("Welcome to Clear the Field!");
 		Button playButton = new Button("Play");
-		playButton.setOnAction(event -> new PlayView());
+		playButton.setOnAction(event -> new PlayView(fieldSize, numberOfMines));
 		layout.getChildren().addAll(gameTitle, playButton);
 
 		Scene startScreen = new Scene(layout, 400, 300);
 		window.setScene(startScreen);
 		window.show();
 
+	}
+
+	/**
+	 * Sets the default settings for the game.
+	 *
+	 */
+	private void setDefaultSettings() {
+		fieldSize = new int[]{10, 10};
+		numberOfMines = 10;
 	}
 }

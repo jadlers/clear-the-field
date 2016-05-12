@@ -13,10 +13,10 @@ public class PlayView {
 	final int size = 40;
 	final int margin = 5;
 
-	public PlayView() {
+	public PlayView(int[] fieldSize, int numberOfMines) {
 		window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
-		field = new Field(10, 10, 10);
+		field = new Field(fieldSize[0], fieldSize[1], numberOfMines);
 		updateScene();
 	}
 
