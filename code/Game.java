@@ -64,15 +64,59 @@ public class Game extends Application {
 		window.setTitle("Settings");
 		window.initModality(Modality.APPLICATION_MODAL);
 
+		Slider widthSlider = createSlider(2, 40, fieldSize[0]);
+		Slider heightSlider = createSlider(2, 40, fieldSize[1]);
+		Slider minesSlider = createSlider(1, 400, numberOfMines);
+		Button saveBtn = new Button("Save & Close");
+
+		window.setOnCloseRequest(event1 -> {
+			saveSettings((int) widthSlider.getValue(), (int) heightSlider.getValue(), (int) minesSlider.getValue());
+		});
+		saveBtn.setOnAction(event -> {
+			saveSettings((int) widthSlider.getValue(), (int) heightSlider.getValue(), (int) minesSlider.getValue());
+			window.close();
+		});
+
 		VBox layout = new VBox(20);
+		layout.setPadding(new Insets(20));
+		layout.getChildren().addAll(widthSlider, heightSlider, minesSlider, saveBtn);
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
 		window.show();
 	}
 
 	/**
-	 * Sets the default settings for the game.
+	 * Uses the parameters to update the settings.
 	 *
+	 * @param newWidth new width to set
+	 * @param newHeight new height to set
+	 * @param newMines new amount of mines to set
+	 */
+	private void saveSettings(int newWidth, int newHeight, int newMines) {
+		fieldSize[0] = newWidth;
+		fieldSize[1] = newHeight;
+		numberOfMines = newMines;
+	}
+
+	/**
+	 * Creates a slider with the specified min, max and current and
+	 * sets the width as well as the major tick distance
+	 *
+	 * @param min the sliders minimum value
+	 * @param max the sliders maximum value
+	 * @param current the sliders current value
+	 * @return
+	 */
+	private Slider createSlider(double min, double max, double current) {
+		Slider slider = new Slider(min, max, current);
+		slider.setShowTickMarks(true);
+		slider.setMajorTickUnit((max-min)/4);
+		slider.setMinWidth(400);
+		return slider;
+	}
+
+	/**
+	 * Sets the default settings for the game.
 	 */
 	private void setDefaultSettings() {
 		fieldSize = new int[]{10, 10};
