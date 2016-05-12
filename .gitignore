@@ -6,7 +6,7 @@
 /out/
 
 ### Java
-.class
+*.class
 
 ### OSX ###
 .DS_Store
