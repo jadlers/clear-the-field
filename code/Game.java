@@ -69,7 +69,7 @@ public class Game extends Application {
 
 		widthSlider = createSlider(2, 40, fieldSize[0]);
 		heightSlider = createSlider(2, 40, fieldSize[1]);
-		minesSlider = createSlider(1, 400, numberOfMines);
+		minesSlider = createSlider(1, (widthSlider.getMax() * heightSlider.getMax()) - 1, numberOfMines);
 		Button saveBtn = new Button("Save & Close");
 
 		Label widthLabel = createLabel("Width: ", widthSlider);
@@ -116,7 +116,23 @@ public class Game extends Application {
 		slider.valueProperty().addListener((observable, oldValue, newValue) -> {
 			String updatedString = info + (int) slider.getValue();
 			label.textProperty().setValue(updatedString);
+			checkMinesValue();
 		});
+	}
+
+	/**
+	 * Checks to see if the current max value of the mines slider
+	 * is higher than the maximum mines allowed in the field. Changes
+	 * the max and current value of minesSlider if necessary.
+	 */
+	private void checkMinesValue() {
+		int minesMaxValue = ((int) heightSlider.getValue() * (int) widthSlider.getValue()) - 1;
+		if ((int) minesSlider.getMax() != minesMaxValue) {
+			minesSlider.setMax(minesMaxValue);
+			if ((int) minesSlider.getValue() > minesMaxValue) {
+				minesSlider.setValue(minesMaxValue);
+			}
+		}
 	}
 
 	/**
