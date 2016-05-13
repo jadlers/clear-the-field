@@ -16,6 +16,9 @@ import javafx.stage.Stage;
 public class Game extends Application {
 	private int[] fieldSize; // indices 0: width, 1: height
 	private int numberOfMines;
+	private Slider widthSlider;
+	private Slider heightSlider;
+	private Slider minesSlider;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -64,10 +67,14 @@ public class Game extends Application {
 		window.setTitle("Settings");
 		window.initModality(Modality.APPLICATION_MODAL);
 
-		Slider widthSlider = createSlider(2, 40, fieldSize[0]);
-		Slider heightSlider = createSlider(2, 40, fieldSize[1]);
-		Slider minesSlider = createSlider(1, 400, numberOfMines);
+		widthSlider = createSlider(2, 40, fieldSize[0]);
+		heightSlider = createSlider(2, 40, fieldSize[1]);
+		minesSlider = createSlider(1, 400, numberOfMines);
 		Button saveBtn = new Button("Save & Close");
+
+		Label widthLabel = createLabel("Width: ", widthSlider);
+		Label heightLabel = createLabel("height: ", heightSlider);
+		Label minesLabel = createLabel("Number of mines: ", minesSlider);
 
 		window.setOnCloseRequest(event1 -> {
 			saveSettings((int) widthSlider.getValue(), (int) heightSlider.getValue(), (int) minesSlider.getValue());
@@ -79,10 +86,37 @@ public class Game extends Application {
 
 		VBox layout = new VBox(20);
 		layout.setPadding(new Insets(20));
-		layout.getChildren().addAll(widthSlider, heightSlider, minesSlider, saveBtn);
+		layout.getChildren().addAll(widthLabel, widthSlider, heightLabel, heightSlider, minesLabel, minesSlider,
+				saveBtn);
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
 		window.show();
+	}
+
+	/**
+	 * Creates a label and assigns a slider to it.
+	 *
+	 * @param info the constant part of the label
+	 * @param slider the slider to connect the label to
+	 */
+	private Label createLabel(String info, Slider slider) {
+		Label label = new Label(info + (int) slider.getValue());
+		addSliderListener(slider, label, info);
+		return label;
+	}
+
+	/**
+	 * Adds a listener to update the current value in
+	 * the label while sliding.
+	 *
+	 * @param slider the slider to add the listener to
+	 * @param label the label to update
+	 */
+	private void addSliderListener(Slider slider, Label label, String info) {
+		slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+			String updatedString = info + (int) slider.getValue();
+			label.textProperty().setValue(updatedString);
+		});
 	}
 
 	/**
