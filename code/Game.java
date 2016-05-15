@@ -39,8 +39,7 @@ public class Game extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Stage window = primaryStage;
-		window.setTitle("Clear The Field");
+		primaryStage.setTitle("Clear The Field");
 		setDefaultSettings();
 
 		VBox layout = new VBox(10);
@@ -53,9 +52,8 @@ public class Game extends Application {
 		layout.getChildren().addAll(gameTitle, playButton, settingsBtn);
 
 		Scene startScreen = new Scene(layout, 400, 300);
-		window.setScene(startScreen);
-		window.show();
-
+		primaryStage.setScene(startScreen);
+		primaryStage.show();
 	}
 
 	/**
@@ -76,9 +74,7 @@ public class Game extends Application {
 		Label heightLabel = createLabel("height: ", heightSlider);
 		Label minesLabel = createLabel("Number of mines: ", minesSlider);
 
-		window.setOnCloseRequest(event1 -> {
-			saveSettings((int) widthSlider.getValue(), (int) heightSlider.getValue(), (int) minesSlider.getValue());
-		});
+		window.setOnCloseRequest(event1 -> saveSettings((int) widthSlider.getValue(), (int) heightSlider.getValue(), (int) minesSlider.getValue()));
 		saveBtn.setOnAction(event -> {
 			saveSettings((int) widthSlider.getValue(), (int) heightSlider.getValue(), (int) minesSlider.getValue());
 			window.close();
@@ -155,7 +151,7 @@ public class Game extends Application {
 	 * @param min the sliders minimum value
 	 * @param max the sliders maximum value
 	 * @param current the sliders current value
-	 * @return
+	 * @return slider with right bounds and current value
 	 */
 	private Slider createSlider(double min, double max, double current) {
 		Slider slider = new Slider(min, max, current);
