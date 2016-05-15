@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -68,11 +69,28 @@ public class Game extends Application {
 		widthSlider = createSlider(2, 40, fieldSize[0]);
 		heightSlider = createSlider(2, 40, fieldSize[1]);
 		minesSlider = createSlider(1, (widthSlider.getMax() * heightSlider.getMax()) - 1, numberOfMines);
-		Button saveBtn = new Button("Save & Close");
 
 		Label widthLabel = createLabel("Width: ", widthSlider);
 		Label heightLabel = createLabel("height: ", heightSlider);
 		Label minesLabel = createLabel("Number of mines: ", minesSlider);
+
+		// Create difficulties
+		HBox difficulties = new HBox(20);
+		difficulties.setAlignment(Pos.CENTER);
+		difficulties.getChildren().addAll(createDifficulty("Easy", 10, 10), createDifficulty("Medium", 15, 45),
+				createDifficulty("Hard", 20, 100));
+
+		// Create sliders
+		VBox sliders = new VBox(20);
+		sliders.getChildren().addAll(widthLabel, widthSlider, heightLabel, heightSlider, minesLabel, minesSlider);
+
+		// Create save & exit button
+		Button saveBtn = new Button("Save & Close");
+
+		VBox layout = new VBox(20);
+		layout.getChildren().addAll(difficulties, sliders, saveBtn);
+		layout.setAlignment(Pos.CENTER);
+		layout.setPadding(new Insets(20));
 
 		window.setOnCloseRequest(event1 -> saveSettings((int) widthSlider.getValue(), (int) heightSlider.getValue(), (int) minesSlider.getValue()));
 		saveBtn.setOnAction(event -> {
@@ -80,10 +98,6 @@ public class Game extends Application {
 			window.close();
 		});
 
-		VBox layout = new VBox(20);
-		layout.setPadding(new Insets(20));
-		layout.getChildren().addAll(widthLabel, widthSlider, heightLabel, heightSlider, minesLabel, minesSlider,
-				saveBtn);
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
 		window.show();
@@ -167,5 +181,24 @@ public class Game extends Application {
 	private void setDefaultSettings() {
 		fieldSize = new int[]{10, 10};
 		numberOfMines = 10;
+	}
+
+	/**
+	 * Creates a button and updates the settings of the game
+	 * to match the name of the button.
+	 *
+	 * @param name text displayed on the Button
+	 * @param fieldSize new width and height of the field
+	 * @param numberOfMines the amount of mines in the field
+	 * @return a button with text and event handler
+	 */
+	private Button createDifficulty(String name, int fieldSize, int numberOfMines) {
+		Button button = new Button(name);
+		button.setOnAction(event -> {
+			widthSlider.setValue(fieldSize);
+			heightSlider.setValue(fieldSize);
+			minesSlider.setValue(numberOfMines);
+		});
+		return button;
 	}
 }
