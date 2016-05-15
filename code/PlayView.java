@@ -9,24 +9,36 @@ import javafx.stage.Stage;
  */
 public class PlayView {
 	Stage window;
+	Scene playScene;
 	Field field;
 	final int size = 40;
-	final int margin = 5;
+	final int margin = 5; // (0.1 * size) + 1
 
 	public PlayView(int[] fieldSize, int numberOfMines) {
 		window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
 		field = new Field(fieldSize[0], fieldSize[1], numberOfMines);
-		updateScene();
+		setupScene();
 	}
 
-	public void updateScene() {
-		Scene scene = updateField();
-		window.setScene(scene);
+	/**
+	 * Sets up the playScene for the first time. Later it's
+	 * updated with the updateScene method.
+	 */
+	public void setupScene() {
+		playScene = new Scene(new Group());
+		updateScene(playScene);
+		window.setScene(playScene);
 		window.show();
 	}
 
-	public Scene updateField() {
+	/**
+	 * Redraws all the squares and updates the scene specified
+	 * with the updated field.
+	 *
+	 * @param scene the scene to update
+	 */
+	public void updateScene(Scene scene) {
 		Group layout = new Group();
 		for (int x = 0; x < field.getField().length; x++) {
 			for (int y = 0; y < field.getField()[0].length; y++) {
@@ -34,6 +46,7 @@ public class PlayView {
 				int currentX = x;
 				int currentY = y;
 				figure.setOnMouseClicked(event -> {
+					// could use && event.isShiftDown() instead of secondary click
 					if (event.getButton() == MouseButton.PRIMARY) {
 						primaryKey(currentX, currentY);
 					} else if (event.getButton() == MouseButton.SECONDARY) {
@@ -45,7 +58,8 @@ public class PlayView {
 				layout.getChildren().add(figure);
 			}
 		}
-		return new Scene(layout, 600, 500);
+		scene.setRoot(layout);
+		playScene = scene;
 	}
 
 	/**
@@ -59,7 +73,7 @@ public class PlayView {
 	private void primaryKey(int x, int y) {
 		boolean okay = field.click(x, y);
 		if (okay) {
-			updateScene();
+			updateScene(playScene);
 			boolean won = field.checkWin();
 			if (won) {
 				FinishedGame.display(window, "Hero of the day!", "You did it!\nThe field is now a safe place.");
@@ -78,6 +92,6 @@ public class PlayView {
 	 */
 	private void secondaryKey(int x, int y) {
 		field.toggleFlag(x, y);
-		updateScene();
+		updateScene(playScene);
 	}
 }
