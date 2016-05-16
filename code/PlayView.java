@@ -34,7 +34,8 @@ public class PlayView {
 
 	/**
 	 * Redraws all the squares and updates the scene specified
-	 * with the updated field.
+	 * with the updated field. Adds event listeners to all squares
+	 * that either clear or flag the clicked square.
 	 *
 	 * @param scene the scene to update
 	 */
@@ -46,11 +47,10 @@ public class PlayView {
 				int currentX = x;
 				int currentY = y;
 				figure.setOnMouseClicked(event -> {
-					// could use && event.isShiftDown() instead of secondary click
-					if (event.getButton() == MouseButton.PRIMARY) {
-						primaryKey(currentX, currentY);
-					} else if (event.getButton() == MouseButton.SECONDARY) {
+					if (event.getButton() == MouseButton.PRIMARY && event.isShiftDown()) {
 						secondaryKey(currentX, currentY);
+					} else if (event.getButton() == MouseButton.PRIMARY) {
+						primaryKey(currentX, currentY);
 					}
 				});
 				figure.setLayoutX(x*size+x*margin);
