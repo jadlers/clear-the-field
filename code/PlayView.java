@@ -27,9 +27,27 @@ public class PlayView {
 	 */
 	public void setupScene() {
 		playScene = new Scene(new Group());
+
+		playScene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+			updateSquareSize();
+			updateScene(playScene);
+		});
+		playScene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
+			updateSquareSize();
+			updateScene(playScene);
+		});
+
 		updateScene(playScene);
 		window.setScene(playScene);
 		window.show();
+	}
+
+	/**
+	 * Sets the size of the squares so that they all fit into the
+	 * window size.
+	 */
+	private void updateSquareSize() {
+
 	}
 
 	/**
