@@ -66,23 +66,8 @@ public class Game extends Application {
 		window.setTitle("Settings");
 		window.initModality(Modality.APPLICATION_MODAL);
 
-		widthSlider = createSlider(2, 40, fieldSize[0]);
-		heightSlider = createSlider(2, 40, fieldSize[1]);
-		minesSlider = createSlider(1, (widthSlider.getMax() * heightSlider.getMax()) - 1, numberOfMines);
-
-		Label widthLabel = createLabel("Width: ", widthSlider);
-		Label heightLabel = createLabel("height: ", heightSlider);
-		Label minesLabel = createLabel("Number of mines: ", minesSlider);
-
-		// Create difficulties
-		HBox difficulties = new HBox(20);
-		difficulties.setAlignment(Pos.CENTER);
-		difficulties.getChildren().addAll(createDifficulty("Easy", 10, 10), createDifficulty("Medium", 15, 45),
-				createDifficulty("Hard", 20, 100));
-
-		// Create sliders
-		VBox sliders = new VBox(20);
-		sliders.getChildren().addAll(widthLabel, widthSlider, heightLabel, heightSlider, minesLabel, minesSlider);
+		VBox sliders = groupSliders();
+		HBox difficulties = groupDifficulties();
 
 		// Create save & exit button
 		Button saveBtn = new Button("Save & Close");
@@ -101,6 +86,45 @@ public class Game extends Application {
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
 		window.show();
+	}
+
+	/**
+	 * Creates different difficulties as Buttons ans groups them
+	 * together in a HBox
+	 *
+	 * @return HBox with all difficulties as children
+	 */
+	private HBox groupDifficulties() {
+		HBox difficulties = new HBox(20);
+		difficulties.setAlignment(Pos.CENTER);
+
+		Button easy = createDifficulty("Easy", 10, 10);
+		Button medium = createDifficulty("Medium", 15, 45);
+		Button hard = createDifficulty("Hard", 20, 100);
+		difficulties.getChildren().addAll(easy, medium, hard);
+
+		return difficulties;
+	}
+
+	/**
+	 * Specifies all the sliders values and limits and group them
+	 * together with informative dynamic labels.
+	 *
+	 * @return VBox with all sliders as children
+	 */
+	private VBox groupSliders() {
+		widthSlider = createSlider(2, 40, fieldSize[0]);
+		heightSlider = createSlider(2, 40, fieldSize[1]);
+		minesSlider = createSlider(1, (widthSlider.getMax() * heightSlider.getMax()) - 1, numberOfMines);
+
+		Label widthLabel = createLabel("Width: ", widthSlider);
+		Label heightLabel = createLabel("height: ", heightSlider);
+		Label minesLabel = createLabel("Number of mines: ", minesSlider);
+		
+		VBox sliders = new VBox(20);
+		sliders.getChildren().addAll(widthLabel, widthSlider, heightLabel, heightSlider, minesLabel, minesSlider);
+
+		return sliders;
 	}
 
 	/**
