@@ -1,6 +1,10 @@
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -11,8 +15,8 @@ public class PlayView {
 	Stage window;
 	Scene playScene;
 	Field field;
-	final int size = 40;
-	final int margin = 5; // (0.1 * size) + 1
+	final int size = 20;
+	final int margin = 3;
 
 	public PlayView(int[] fieldSize, int numberOfMines) {
 		window = new Stage();
@@ -27,27 +31,9 @@ public class PlayView {
 	 */
 	public void setupScene() {
 		playScene = new Scene(new Group());
-
-		playScene.widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
-			updateSquareSize();
-			updateScene(playScene);
-		});
-		playScene.heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
-			updateSquareSize();
-			updateScene(playScene);
-		});
-
 		updateScene(playScene);
 		window.setScene(playScene);
 		window.show();
-	}
-
-	/**
-	 * Sets the size of the squares so that they all fit into the
-	 * window size.
-	 */
-	private void updateSquareSize() {
-
 	}
 
 	/**
