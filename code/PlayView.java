@@ -21,6 +21,7 @@ public class PlayView {
 	public PlayView(int[] fieldSize, int numberOfMines) {
 		window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
+		window.setResizable(false);
 		field = new Field(fieldSize[0], fieldSize[1], numberOfMines);
 		setupScene();
 	}
@@ -44,7 +45,9 @@ public class PlayView {
 	 * @param scene the scene to update
 	 */
 	public void updateScene(Scene scene) {
-		Group layout = new Group();
+		int padding = 10;
+		Pane layout = new Pane();
+		layout.setPadding(new Insets(0, padding, padding, 0));
 		for (int x = 0; x < field.getField().length; x++) {
 			for (int y = 0; y < field.getField()[0].length; y++) {
 				SquareFigure figure = field.createSquareFigure(x, y, size);
@@ -57,8 +60,8 @@ public class PlayView {
 						primaryKey(currentX, currentY);
 					}
 				});
-				figure.setLayoutX(x*size+x*margin);
-				figure.setLayoutY(y*size+y*margin);
+				figure.setLayoutX(padding + x*size+x*margin);
+				figure.setLayoutY(padding + y*size+y*margin);
 				layout.getChildren().add(figure);
 			}
 		}
