@@ -113,8 +113,8 @@ public class Game extends Application {
 	 * @return VBox with all sliders as children
 	 */
 	private VBox groupSliders() {
-		widthSlider = createSlider(2, 40, fieldSize[0]);
-		heightSlider = createSlider(2, 40, fieldSize[1]);
+		widthSlider = createSlider(2, 30, fieldSize[0]);
+		heightSlider = createSlider(2, 30, fieldSize[1]);
 		minesSlider = createSlider(1, (widthSlider.getMax() * heightSlider.getMax()) - 1, numberOfMines);
 
 		Label widthLabel = createLabel("Width: ", widthSlider);
