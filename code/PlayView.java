@@ -11,8 +11,8 @@ public class PlayView {
 	Stage window;
 	Scene playScene;
 	Field field;
-	final int size = 40;
-	final int margin = 5; // (0.1 * size) + 1
+	int size = 40;
+	int margin = 3; // (0.1 * size) + 1
 
 	public PlayView(int[] fieldSize, int numberOfMines) {
 		window = new Stage();
@@ -47,7 +47,27 @@ public class PlayView {
 	 * window size.
 	 */
 	private void updateSquareSize() {
+		int windowWidth = (int) window.getWidth();
+		int windowHeight = (int) window.getHeight();
 
+		if (windowWidth < windowHeight) {
+
+			/**
+			 * width = amount*size + (amount - 1) * (size * 0.1 + 1)
+			 * width = amount*size + (amount - 1) * size * 0.1 + (amount - 1)
+			 * width - (amount - 1) = amount * size + amount * size * 0.1 - size * 0.1
+			 * width - (amount - 1) = size * (amount + amount * 0.1 - 0.1)
+			 * size = (width - amount + 1) / (amount + amount * 0.1 - 0.1)
+			 */
+
+			int fieldWidth = field.getField().length;
+			int newSize = (windowWidth - fieldWidth + 1)/(fieldWidth + (int) ((fieldWidth * 0.1) - 0.1));
+			int newMargin = (int) (newSize*0.1) + 1;
+			size = newSize;
+			margin = newMargin;
+		} else {
+			int fieldHeight = field.getField()[0].length;
+		}
 	}
 
 	/**
