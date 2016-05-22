@@ -7,6 +7,11 @@ the square you checked. The problem is that the tool will make any mine explode 
 careful!
 
 ## How to install
+### Easy & short way
+1. Download the ```clear-the-field.jar``` file
+2. Open the file and the game starts
+
+### Longer & more complicated way
 1. Click the "Download ZIP" button and unzip the file
 2. Open the terminal and navigate to the **code** directory inside the unzipped directory clear-the-field
 3. Compile the game by typing: ```javac Game.java```
