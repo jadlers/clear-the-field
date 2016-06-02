@@ -3,8 +3,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -15,6 +13,8 @@ public class PlayView {
 	Stage window;
 	Scene playScene;
 	Field field;
+	long startTime;
+	float totalTime;
 	final int size = 20;
 	final int margin = 3;
 
@@ -35,6 +35,7 @@ public class PlayView {
 		updateScene(playScene);
 		window.setScene(playScene);
 		window.show();
+		startTime = System.currentTimeMillis();
 	}
 
 	/**
@@ -83,6 +84,8 @@ public class PlayView {
 			updateScene(playScene);
 			boolean won = field.checkWin();
 			if (won) {
+				totalTime = System.currentTimeMillis() - startTime;
+				System.out.printf("%.2fs\n", totalTime/1000);
 				FinishedGame.display(window, "Hero of the day!", "You did it!\nThe field is now a safe place.");
 			}
 		} else {
