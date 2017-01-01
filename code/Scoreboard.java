@@ -14,7 +14,12 @@ public class Scoreboard {
 	 */
 	public Scoreboard() {
 		createReader();
-		createWriter();
+		//createWriter();
+		try {
+			importScores();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -28,6 +33,10 @@ public class Scoreboard {
 			this.name = name;
 			this.time = time;
 		}
+	}
+
+	private void importScores() throws IOException {
+		System.out.println(reader.read());
 	}
 
 	/**

@@ -120,7 +120,7 @@ public class Game extends Application {
 		Label widthLabel = createLabel("Width: ", widthSlider);
 		Label heightLabel = createLabel("height: ", heightSlider);
 		Label minesLabel = createLabel("Number of mines: ", minesSlider);
-		
+
 		VBox sliders = new VBox(20);
 		sliders.getChildren().addAll(widthLabel, widthSlider, heightLabel, heightSlider, minesLabel, minesSlider);
 
@@ -204,7 +204,7 @@ public class Game extends Application {
 	 */
 	private void setDefaultSettings() {
 		fieldSize = new int[]{10, 10};
-		numberOfMines = 10;
+		numberOfMines = 1; //TODO change back to 10
 	}
 
 	/**

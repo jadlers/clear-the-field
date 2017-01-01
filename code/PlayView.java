@@ -87,6 +87,7 @@ public class PlayView {
 				totalTime = System.currentTimeMillis() - startTime;
 				System.out.printf("%.2fs\n", totalTime/1000);
 				FinishedGame.display(window, "Hero of the day!", "You did it!\nThe field is now a safe place.");
+				new Scoreboard();
 			}
 		} else {
 			FinishedGame.display(window, "Explosion!", "Sorry to say it but you hit\n a mine and lost " +
